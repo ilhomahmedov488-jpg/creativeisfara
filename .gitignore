@@ -1,0 +1,27 @@
+# Local settings and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+secrets*.json
+
+# Private contact lists, databases and customer materials
+private/
+uploads/
+media/
+backups/
+*.sqlite3
+*.sql
+*.dump
+
+# Build and development output
+node_modules/
+dist/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
