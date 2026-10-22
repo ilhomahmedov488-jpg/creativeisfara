@@ -30,3 +30,4 @@ staticfiles/
 htmlcov/
 .pytest_cache/
 *.egg-info/
+/preview-dist/
