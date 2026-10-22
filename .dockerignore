@@ -1,0 +1,10 @@
+.git
+.venv
+.env*
+private
+backend/db.sqlite3
+backend/media
+backend/staticfiles
+**/__pycache__
+design
+assets

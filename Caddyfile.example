@@ -1,0 +1,16 @@
+# Replace studio.example.com. Bind app only to loopback; the proxy overwrites IP headers.
+studio.example.com {
+    request_body {
+        max_size 205MB
+    }
+    header X-Content-Type-Options nosniff
+    handle_path /media/* {
+        root * /srv/creative-media
+        file_server
+    }
+    handle {
+        reverse_proxy 127.0.0.1:8000 {
+            header_up X-Real-IP {remote_host}
+        }
+    }
+}
