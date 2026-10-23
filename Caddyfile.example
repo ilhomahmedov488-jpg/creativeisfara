@@ -4,6 +4,10 @@ studio.example.com {
         max_size 205MB
     }
     header X-Content-Type-Options nosniff
+    handle_path /static/* {
+        root * /srv/creative-static
+        file_server
+    }
     handle_path /media/* {
         root * /srv/creative-media
         file_server

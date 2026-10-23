@@ -4,6 +4,7 @@ WORKDIR /app
 COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt && useradd --uid 10001 --create-home studio
 COPY --chown=studio:studio backend/ .
+COPY --chown=studio:studio frontend/ /frontend/
 RUN mkdir -p /app/media /app/staticfiles && chown -R studio:studio /app/media /app/staticfiles
 USER studio
 EXPOSE 8000

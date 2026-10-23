@@ -26,6 +26,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 ROOT_URLCONF = 'config.urls'
+FRONTEND_DIR = Path(os.getenv('FRONTEND_DIR', BASE_DIR.parent / 'frontend'))
+TEMPLATES = [{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': [FRONTEND_DIR], 'APP_DIRS': True,
+}]
 WSGI_APPLICATION = 'config.wsgi.application'
 AUTH_USER_MODEL = 'studio.User'
 AUTH_PASSWORD_VALIDATORS = [
@@ -54,6 +59,7 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [FRONTEND_DIR / 'static']
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 DATA_UPLOAD_MAX_MEMORY_SIZE = 2 * 1024 * 1024
