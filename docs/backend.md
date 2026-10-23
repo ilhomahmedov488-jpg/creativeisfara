@@ -155,13 +155,14 @@ pip check
 docker compose up -d db
 docker compose build
 docker compose run --rm app python manage.py migrate
+docker compose run --rm app python manage.py collectstatic --noinput
 docker compose up -d app worker
 ```
 
 API слушает только `127.0.0.1:8000`, база наружу не открыта. В Caddyfile.example замените домен/настройте HTTPS. Только за доверенным proxy, который перезаписывает входные заголовки, включите `TRUST_PROXY_HTTPS=true`, `TRUST_CLIENT_IP_HEADER=true`. Прямой внешний доступ к приложению должен быть закрыт. Иначе оставьте false.
 
-Медиа в volume media_data: подключите Caddy на чтение в `/srv/creative-media` или измените путь. Не отдавайте `.env`, private, SQLite или корень проекта веб-сервером. Контейнер работает от непривилегированного пользователя. С production-настройками выполните `python backend/manage.py check --deploy`.
+Статика в volume static_data: подключите Caddy на чтение в `/srv/creative-static`. Медиа в volume media_data: подключите Caddy на чтение в `/srv/creative-media` или измените пути. Приложение отдаёт frontend с `/`, API с `/api/`. Не отдавайте `.env`, private, SQLite или корень проекта веб-сервером. Контейнер работает от непривилегированного пользователя. С production-настройками выполните `python backend/manage.py check --deploy`.
 
 Копируйте PostgreSQL/media ежедневно вне сервера и перед миграциями, проверяйте восстановление. Следите за местом: лимит ролика не ограничивает суммарный объём. CDN, облачное хранение, транскодирование и интерфейс мониторинга пока не подключены.
 
-Следующий этап: frontend с API, проверка настоящего Payom и полного сценария на выбранном сервере.
+Frontend с API реализован, инструкция — [frontend.md](frontend.md). Следующий этап: проверка настоящего Payom и полного сценария на выбранном сервере.

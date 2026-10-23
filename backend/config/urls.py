@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import include, path
+from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 
 from studio import views
@@ -12,6 +13,7 @@ router.register('reviews', views.ReviewViewSet, basename='reviews')
 router.register('faq', views.FAQViewSet, basename='faq')
 
 urlpatterns = [
+    path('', TemplateView.as_view(template_name='index.html'), name='frontend'),
     path('health/', views.health),
     path('api/auth/csrf/', views.csrf),
     path('api/auth/request-code/', views.RequestCode.as_view()),
